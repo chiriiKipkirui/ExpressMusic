@@ -1,0 +1,81 @@
+{% extends 'main/base.html'%}
+{% load static%}
+{%block title%}Video Player{%endblock%}
+<head>
+    <meta name="view-port" content="width=device-width initial-scale=1">
+
+
+</head>
+
+ {% if request.user.is_authenticated%}
+        <button class="btn btn-success"><a style="color:#fff;" href="{% url 'ngoma:add_song' album.slug %}">Upload songs</a></button>
+        <button class="btn btn-success"><a style="color:#fff;" href="{% url 'ngoma:add_song_from_links' album.slug %}">Add From urls</a></button>
+        <button class="btn btn-success"><a href="{% url 'ngoma:video_player' album.slug %}">Play as Video</a></button>
+        {% endif%}
+
+<!--{% block stylesheet%}
+<link rel="stylesheet" href="{% static 'css/audio.css'% }">
+{% endblock%}-->
+{% block body%}
+
+<style>
+/* #playlist{
+    display: table;
+} */
+</style>
+
+<div class="container-fluid">
+    {% csrf_token %}
+    {% if album %}
+    <p id="album" class="hidden">{{album.album_slug}}</p>
+    {% endif%}
+    <input type="text" class="search" name="search" id="search_text" value="" placeholder="Search">
+
+
+
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-md-8" >
+      <!-- video player code -->
+
+ <video id="videoarea"  autoplay controls  poster="" src="" class="playing"></video>
+ <!--end of video holder -->
+ <p class="text-center" id="video-description"></p>
+
+  </div>
+  <!--playlist holder -->
+  <div class="col-md-4">
+
+          {% if album %}
+            {% if request.user.is_authenticated%}
+            <button class="btn btn-success"><a href="{% url 'ngoma:add_song' album.slug %}">Upload songs</a></button>
+            <button class="btn btn-success"><a href="{% url 'ngoma:add_song_from_links' album.slug %}">Add From urls</a></button>
+            {% endif%}
+            {% endif%}
+
+
+      <h3 id="playlist_header">Playlist</h3>
+          <ul id="playlist_video" >
+
+           {% if songs%}   {# <li class="hidden" movieurl = ""></li> #}
+           {% for song in songs%}
+
+          <li movieurl="{{song.song_file.url}}" moviesposter=""> #{{forloop.counter}}. {{song.song_title}}</li>
+          {% endfor%}
+          {%else%}
+          <p class="text-info">Sorry There are no songs to play Add them from the add album icon above</p>
+          {%endif%}
+
+
+      </ul>
+  </div>
+  <!--end of playlist holder -->
+
+  </div>
+</div>
+</div>
+
+
+{%endblock%}

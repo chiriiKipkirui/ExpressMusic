@@ -1,0 +1,50 @@
+{% extends 'main/base.html'%}
+{% load static%}
+{%block title%}Music home{%endblock%}
+{%block heading%}<h3 > </h3>{%endblock%}
+<!--{% block stylesheet%}
+<link rel="stylesheet" href="{% static 'css/audio.css'% }">
+{% endblock%}-->
+{% block body%}
+<style>
+#form-delete{
+    display: inline;
+}
+
+</style>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-sm-6">
+      <img src="{{ album.logo.url }}" height="300px" width="auto" title="Album title">
+      {% if request.user.is_authenticated%}
+      <form method="post" action="{% url 'ngoma:album_delete' album.slug %}" style="margin-top:10px;">
+          {% csrf_token%}
+          <button type="submit" class="danger">Delete <span class="glyphicon glyphicon-trash"></span></button><small class="text-warning" id="delete"></small>
+      </form>
+      {% endif%}
+
+    </div>
+    <div class="col-md-6 col-sm-6">
+        {% if request.user.is_authenticated%}
+        <button class="btn btn-success"><a href="{% url 'ngoma:add_song' album.slug %}">Upload songs</a></button>
+        <button class="btn btn-success"><a href="{% url 'ngoma:add_song_from_links' album.slug %}">Add From urls</a></button>
+        <button class="btn btn-success"><a href="{% url 'ngoma:video_player' album.slug %}">Play as Video</a></button>
+        {% endif%}
+
+    {% include "main/audio.html" %}
+
+      {% if songs_external%}
+      <h2>From External Links</h2>
+
+      {%for song_ext in songs_external %}
+      <video src="{{song_ext.link}}" controls >Cannot Play audio</video>
+
+
+       <p>{{song_ext.link}}</p>
+      {% endfor%}{% endif%}
+
+    </div>
+</div>
+</div>
+<script src="{% static 'js/app.js'%}"
+{%endblock%}

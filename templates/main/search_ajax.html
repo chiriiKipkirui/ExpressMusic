@@ -1,0 +1,11 @@
+{% load static%}
+{% if songs%}
+
+{% for song in songs%}
+<li movieurl="{{song.song_file.url}}" moviesposter=""> #{{forloop.counter}}. {{song.song_title}}</li>
+{% endfor%}
+{% else%}
+<p class="text-info">That didn't work try another method</p>
+
+{% endif%}
+<script src="{% static 'js/video.js'%}"></script>

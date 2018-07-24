@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Accounts|Register{% endblock %}
+{% block header %}{% endblock%}
+{% block body %}
+<style>
+
+        #id_password,#id_username,#id_first_name,#id_last_name{
+            margin-left:23px;
+        }
+
+</style>
+<div class="container">
+
+    <form method="POST" action="" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+        {% if field.errors %}
+            <p style="color:red;">{{ field.errors }}</p>
+        {% endif %}
+        <p><span class="text-info">{{ field.label_tag }}</span>&nbsp;&nbsp;<span class="input_info">{{ field }}</span></p>
+    {% endfor %}
+    <button class="btn btn-success" style="margin-left:150px">Sign Up</button>
+    </form>
+</div>
+
+{% endblock %}

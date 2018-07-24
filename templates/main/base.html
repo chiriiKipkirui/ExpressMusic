@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load staticfiles%}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>{% block title %}Music applets{% endblock%}</title>
+
+    <!-- Bootstrap -->
+
+    <!--booststraping -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" >
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+     <!-- Google fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <!--end of googlefonts -->
+      <!-- mycss -->
+      <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"  type="text/css">
+      <link rel="stylesheet" href="{% static 'css/audio.css'%}">
+      <link rel="stylesheet" href="{% static 'css/video.css'%}">
+      <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+
+
+     <!--end of bootstraping -->
+  </head>
+  <body>
+    <!--navbar -->
+<header id="header">
+    <nav class="navbar">
+      <div class="container-fluid">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse"
+          data-target="#MyNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand " style="font-family: lucida handwriting;" href={% url 'home_base' %} title="Takes you to the homepage"  >Express Music</a>
+        </div>
+        <div class="collapse navbar-collapse " id="MyNavbar">
+          <ul class="nav navbar-nav navbar-left">
+            <li><a href="{% url 'ngoma:home' %}"><span class="glyphicon glyphicon-cd" title="You must be logged in to manage albums"></span>&nbsp;Albums</a></li>
+            <li><a href="{% url 'ngoma:just_play'%}"><span class="glyphicon glyphicon-music" title="plays all music available"></span>&nbsp;Play</a></li>
+
+          </ul>
+          {% block search_ajax_form%}
+
+              {% endblock%}
+          <ul class="nav navbar-nav navbar-right">
+
+            {% if request.user.is_authenticated%}
+            <li><a href="{% url 'ngoma:add_album'%}"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add Albums</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;{{request.user.username}}</a></li>
+            <li><a href="{% url 'ngoma:logout' %}"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
+
+            {%else %}
+            <li><a href="{% url 'ngoma:register'%}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;
+            Register</a></li>
+            <li><a href="{% url 'ngoma:login'%}"><span class="glyphicon glyphicon-user"></span>&nbsp;
+            Login</a></li>
+            {%endif%}
+
+
+            <li><!---contact us modal -->
+
+
+              <!--end of modal -->
+          </ul>
+            </div></div>
+    </nav>
+</header>
+
+<!-- end of header block -->
+
+    <!--endnavbar -->
+    <!--All the headings here -->
+    {% comment %} {% block heading %}<h1 class="text-danger text-center page-header">Hello, world!</h1>{% endblock%} {% endcomment %}
+    <!--end of headings -->
+    <!--body contents here -->
+{% block body%}{%endblock%}
+    <!--end of body -->
+
+   <!--img src="{% static 'img/img0.jpg'%}"-->
+
+
+<!--footer -->
+<footer class="navbar ">
+<div class="container-fluid text-center">
+  <div class="row">
+    <div class="col-sm-4">
+      <h4>Contact Us</h4>
+      <br>
+    <p><a href="#hidden1" data-toggle="collapse">Our address info here</a></p>
+    <div id="hidden1" class="collapse">
+      <img src="{% static 'img/nairobi.jpg'%}" height="160px" width="100%">
+    </div>
+    </div>
+    <div class="col-sm-4">
+    <div class="links">
+    <h4>Connect with us</h4>
+    <div class="links_connect">
+    <a href="#" class="fa fa-facebook-square"></a>
+    <a href="#" class="fa fa-twitter"></a>
+    <a href="#" class="fa fa-youtube"></a>
+    <a href="#" class="fa fa-whatsapp"></a>
+    <a href="#" class="fa fa-google-plus"></a>
+  </div>
+
+    </div>
+    </div>
+    <div class="col-sm-4">
+    <img src="https://store-images.s-microsoft.com/image/apps.37335.9007199266251864.8b8cb529-3801-4023-9e40-4bcf503b65f5.340138b0-f04d-4e52-a43a-a44ce20b8582?w=180&h=180&q=60" alt="Muziki" class="icon" height="100px">
+  </div>
+
+</div>
+</footer>
+
+<!--end footer -->
+<!--Javascript Sourcing -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+<script src=" {% static 'js/search_ajax.js' %}"></script>
+<script src="{% static 'js/video.js' %}"></script>
+
+  </body>
+</html>

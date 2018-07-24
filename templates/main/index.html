@@ -1,0 +1,30 @@
+{% extends 'main/base.html'%}
+{% load static%}
+{%block title%}Music home{%endblock%}
+{%block heading%}<h3 > </h3>{%endblock%}
+{% block body%}
+<style>
+a:hover,a:link{
+    text-decoration: none;
+
+}
+
+</style>
+<div class="container">
+  <div class="row">
+      {% if albums %}
+      {% for album in albums%}
+      <div class="col-md-3 col-sm-12" id="albums-container">
+        <ul class="list-group list-unstyled well">
+          <li><a href="{% url 'ngoma:video_player' album.slug%}"><img src="{{album.logo.url}}" alt="Nairobi" height="100px" width="100px"><p>&nbsp;&nbsp;{{album.album_title}}<p></a></li>
+        </ul>
+
+      </div>
+      {% endfor%}
+      {% else%}
+      <h3>You currently dont have any <span class="glyphicon glyphicon-cd"></span> albums please add them from the <i><span class="glyphicon glyphicon-plus"></span>Add Albums</i>  button above.Welcome</h3>
+      {% endif%}
+
+  </div>
+</div>
+{%endblock%}

@@ -1,0 +1,38 @@
+
+{% extends 'main/base.html'%}
+{% load static%}
+{%block title%}Login|redirect{%endblock%}
+{%block heading%}<h3 class="page-header text-center">Login|Create Account</h3>{%endblock%}
+
+{% block body%}
+<style type="text/css" media="screen">
+.row {
+ margin-bottom: 20px;
+ text-align: center;
+}
+#redirect a{
+  text-decoration: none;
+  font-size: 1.2em;
+}
+#redirect a:hover{
+  text-decoration: none;
+  font-size: 1.4em;
+
+
+}
+p {
+  font-size: 1.3em;
+}
+
+
+</style>
+<div class="container">
+  <div class="row" id="redirect">
+    <p class="text-warning">To access all your  albums and music you must be logged in </p><a href="#">Login here</a> <h5>Or</h5>
+    <p class="text-muted">Sign up <a href="#">Here</a> </p>
+  </div>
+</div>
+{% for song in songs%}
+<p>song.id</p>
+{% endfor%}
+{%endblock%}

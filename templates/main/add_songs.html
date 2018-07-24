@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Express Music|Add albums{% endblock %}
+{% block header %}{% endblock%}
+{% block body %}
+    <style>
+            
+            select{
+                padding:4px;
+                margin-left:10px;
+            }
+            input[type='file']{
+                margin-left:30px;
+            }
+            input[type='checkbox']{
+                margin-left:20px;
+                height:20px;
+                padding-top:10px;
+                width:20px;
+            }
+    </style>
+    <div class="container">
+        <form method="POST" action="" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+          {{ form.as_p }}
+
+            <button type="submit" class="btn btn-success col-md-offset-2 col-md-sm-offset-2">Add</button>
+
+
+        </form>
+
+    </div>
+
+
+{% endblock %}

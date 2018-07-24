@@ -1,0 +1,114 @@
+.navbar-brand{
+	font-family: 'Satisfy', cursive;
+	color:white;
+}
+.navbar-header button{
+	background-color: white;
+	text-decoration: underline;
+}
+a:hover,a:link{
+	text-decoration: none;
+
+}
+button a:link{
+	color:#fff;
+}
+.search{
+	margin:0 auto 14px 20%;
+	border:0;
+	padding:4px;
+	width:40%;
+	height:30px;
+	font-family: "Acherus Grotesque";
+}
+.search::after{
+	content:'fa fa-search fa-fw';
+	color:#ccc;
+}
+
+	/* color:white; */
+
+button .navbar-toggle .collapsed{
+
+}
+footer{
+	margin-top:20px;
+}
+.navbar{
+	margin-bottom: 20px;
+}
+.navbar,footer {
+	min-height: 55px;
+	border-radius:0;
+	background-color: rgb(144, 104, 190);
+	border: none;
+
+}
+
+.navbar a,footer a {
+	color:white;
+}
+.navbar a:hover {
+	color:white;
+
+}
+/* end of navbar */
+aside{
+	background-color:#fff;
+	color:white;
+}
+
+.fa {
+	font-size: 1.5em;
+	padding-right:4px;
+	color:#eee;
+}
+
+.modal-body  a{
+	color:#ccc;
+}
+#albums-container {
+	padding:0px 10px;
+}
+form {
+	margin-top:50px;
+	margin-left:200px;
+}
+.errorlist li{
+   color:red;
+   list-style-type: none;
+   font-family: Aller;
+   font-size:1.0em;
+}
+
+/*
+*{
+	background-color:#dddfd4;
+
+
+
+} */
+@media(max-width:670px){
+
+	form {
+		padding-left:2px;
+		margin-left:2px;
+
+	}
+	form button{
+		margin-left:40%;
+	}
+	form #reset{
+		margin-left: 20%;
+	}
+	.search{
+		position: relative;
+		top:-17px;
+		margin:5px 23px;
+		border:0;
+		padding:4px;
+		width:90%;
+		height:30px;
+		font-family: "Acherus Grotesque";
+	}
+}

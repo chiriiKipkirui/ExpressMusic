@@ -1,0 +1,113 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Welcome|Express Music{% endblock %}
+<!---heading -->
+{% block heading %}
+
+{% endblock %}
+<!--end of the headerblock -->
+{% block body %}
+    <style>
+        .section_intro p{
+            font-family: "Acherus Grotesque",Arial,sans-serif;
+            font-size:1.2em;
+
+        }
+        .context{
+            padding:10px;
+            margin-left:30%;
+
+
+        }
+       .context-submit{
+            color:green;
+            margin-left:20%;
+
+
+        }
+        label {
+            padding-right: 8px;
+        }
+        .get-music {
+            margin-top:6px;
+            margin-left:40%;
+            background-color:green;
+            color:white;
+         border:none;
+        }
+        .get-music a{
+            color:white;
+        }
+        a:hover,a:link{
+            text-decoration: none;
+
+        }
+        select{
+
+            width:120px;
+            height:23px;
+        }
+</style>
+
+<div class=" intro-body">
+
+    <div class="container">
+
+        <section class="section_intro">
+            <p><span style="font-family: lucida handwriting;font-weight: bolder;">Express Music</span>
+             is a music recommendation and streaming site.It lets you enjoy music depending on your current pyschological state such as happy or angry,depending on your activity such as sleeping,relaxing or driving to the other part of the country.You can also create your own custom playlist depending on the type of music you love most such as Country Music,Reggae or just that party dancehall.Do you have purchased musical albums that you want to keep as private as you wish? We will also help you keep it safe and make it available for you to stream across the many devices you have be it mobile devices,your computer or on your television set.Just sign up for an account or if you have an account just login and lets enjoy the music.
+                We also support music streaming from other sites.You can add the music from video streaming sites such as YouTube and have it on your album.
+            </p>
+            <p>Please fill in the form below to get that awesome music you love or just press the "Just Give Me Music button" or search above for that awesome music you want.</p>
+
+
+        </section>
+        {% if request.user.is_authenticated%}
+
+        <form method="post" class="context" action="{% url 'ngoma:recommend'%}">
+            {% csrf_token %}
+        <label>Mood:&nbsp;&nbsp;&nbsp;&nbsp;</label><select name="mood">
+            <option value="general">Select Mood</option>
+            <option value="sad">Sad</option>
+            <option value="happy">Happy</option>
+            <option value="angry">Angry</option>
+            <option value="spiritual">Spiritual</option>
+
+
+
+            </select><br>
+        <label>Activity:</label>
+        <select name="activity">
+            <option value="general">Select Activity</option>
+            <option value="sleeping">Sleeping</option>
+            <option value="driving">Driving</option>
+            <option value="joking">Joking</option>
+            <option value="coding">Coding</option>
+            <option value="parting">Partying</option>
+
+
+            </select><br>
+        <label>Genre:&nbsp;&nbsp;&nbsp;</label>
+        <select name="genre">
+            <option value="General">Select Genre</option>
+            <option value="Reggae">Reggae</option>
+            <option value="Dancehall">DanceHall</option>
+            <option value="Gospel">Gospel</option>
+            <option value="Bongo">Bongo</option>
+            <option value="Country">Country</option>
+            <option value="Rnb">Rnb</option>
+            <option value="Hip Hop|Rap">HipHop|Rap</option>
+            <option value="Rock and Roll">Rock & Roll</option></select><br>
+
+            <input type="submit" value="Submit" class="context-submit">
+        </form>
+        {% else%}
+        <p class="text-warning">You must be logged in to use the recommendation form</p>
+        {%endif%}
+        <button  class='get-music' ><a href="{% url 'ngoma:just_play' %}">Just Give Me Music</a></button>
+
+
+    </div>
+</div>
+
+{% endblock %}

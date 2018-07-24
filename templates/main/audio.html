@@ -1,0 +1,45 @@
+{% load static %}
+<head>
+
+</head>
+<!--music audio player-->
+    <div id="container">
+    	<div id="audio-img">
+    		<img src="{{album.logo.url}}" alt="" height="200px;" width="200px">
+    	</div>
+    	<div id="audio-player">
+    		<div id="audio-info">
+    			<marquee><span class="artist"></span><span class="title"></span></marquee><br>
+    		</div>
+    		<input id="volume" type="range" min="0" max="10" value="3" style=""><br>
+    		<div id="audio-buttons">
+    			<button type="button" id="prev" style=" background:url({% static 'img/audio/prev.png' %}) no-repeat;"></button>
+    			<button type="button" id="play" style=" background:url({% static 'img/audio/play.png' %}) no-repeat;"></button>
+    			<button type="button" id="pause" style=" background:url({% static 'img/audio/pause.png' %}) no-repeat;"></button>
+    			<button type="button" id="stop" style=" background:url({% static 'img/audio/stop.png' %}) no-repeat;"></button>
+    			<button type="button" id="next" style=" background:url({% static 'img/audio/next.png' %}) no-repeat;"></button>
+    		</div>
+    		<div id="clearfix"></div>
+    		<div id="tracker">
+    			<div id="progress-bar" style="background:url({% static "img/audio/progress_bg.png" %}) no-repeat;">
+    				<span id="progress" style="background:url({%  static "img/audio/progress.png" %}) no-repeat;"></span>
+    			</div>
+    			<span id="duration"></span>
+    		</div>
+    		<div id="clearfix"></div>
+    		<ul id="playlist">
+                {% for song in songs %}
+    			<li song="{{song.song_file.url}}" artist="" cover="cover.jpg">{{song.song_title}}</li>{% if request.user.is_authenticated%}<!--form id="song_delete"action="{% url 'ngoma:delete_song' album.id song.id %}" method="post">
+                    {% csrf_token%}
+                <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button></form-->
+                &nbsp;<a href="{% url 'ngoma:delete_song' album.slug song.id%}"><span class="glyphicon glyphicon-trash danger"></span></a>{% endif%}
+
+                {% endfor%}
+            </ul>
+    	</div>
+
+    </div>
+<!--Javascript code here-->
+
+
+    <!--end of audio-->
